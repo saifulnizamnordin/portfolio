@@ -128,3 +128,24 @@
     @apply font-sans;
     }
 }
+/* Data-viz & status tokens (validated reference palette) */
+:root {
+    --viz-series: #2a78d6;
+    --viz-series-soft: #2a78d61f;
+    --status-good: #0ca30c;
+    --status-warning: #fab219;
+    --status-critical: #d03b3b;
+}
+
+.dark {
+    --viz-series: #3987e5;
+    --viz-series-soft: #3987e52e;
+}
+
+@theme inline {
+    --color-viz: var(--viz-series);
+    --color-viz-soft: var(--viz-series-soft);
+    --color-good: var(--status-good);
+    --color-warning: var(--status-warning);
+    --color-critical: var(--status-critical);
+}

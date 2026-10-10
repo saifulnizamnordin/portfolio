@@ -248,10 +248,10 @@ export type SkillGroup = { name: string; items: string[] };
 
 export const skillGroups: SkillGroup[] = [
   { name: "Cloud Engineering", items: ["AWS", "Alibaba Cloud", "Azure", "Google Cloud", "DigitalOcean", "Cloudflare"] },
-  { name: "CI/CD & Automation", items: ["GitLab CI/CD", "Jenkins", "GitHub Actions", "Terraform"] },
+  { name: "CI/CD & Automation", items: ["GitLab CI/CD", "GitLab Runner", "Jenkins", "GitHub Actions", "Terraform", "SonarQube"] },
   { name: "Identity & Access", items: ["authentik", "OAuth2", "OIDC", "SAML", "LDAP", "Active Directory"] },
   { name: "Monitoring & Observability", items: ["Grafana", "New Relic", "CloudWatch", "JMeter"] },
-  { name: "Microservices & Orchestration", items: ["Docker", "Kubernetes", "Containerd", "Elastic Beanstalk"] },
+  { name: "Microservices & Orchestration", items: ["Docker", "Kubernetes", "Containerd", "Container Registry", "Elastic Beanstalk"] },
   { name: "Programming & Scripting", items: ["Bash", "PHP", "Python", "Ruby", "C#", "C++", "Modern C++", ".NET", "TypeScript", "JavaScript", "jQuery", "HTML5", "CSS3"] },
   { name: "Design & Build Toolchain", items: ["Qt", "FPGA", "CMake", "Ninja", "Ccache", "MinGW64", "MSYS2", "MSVC", "UCRT", "MSVCRT", "TBB", "Cross-Compile"] },
   { name: "Databases", items: ["MySQL", "MSSQL", "MariaDB", "SQLite"] },
@@ -284,3 +284,51 @@ export const certifications = [
     skills: ["Object-Oriented Programming (OOP)", "C++", "Modern C++", "Software Design Patterns"],
   },
 ];
+
+// Portfolio case study: FPGA CI/CD platform.
+// Image names, layers and job types below are illustrative — rename them to match the real setup.
+export const fpgaPlatform = {
+  title: "FPGA CI/CD Platform",
+  summary:
+    "Designed and operate the CI/CD platform behind FPGA application implementation: a fleet of 42 fully Dockerized runners, a container registry holding every toolchain and dependency image the FPGA builds need, a live status dashboard for the infrastructure, and a Kubernetes cluster hosting the supporting CI/CD tools such as SonarQube.",
+  runners: {
+    count: 42,
+    coresEach: 32,
+    memoryGbEach: 32,
+    executor: "Docker",
+  },
+  jobTypes: ["synthesis", "place & route", "bitstream", "C++ build", "Qt build", "unit tests", "cross-compile"],
+  registryImages: [
+    {
+      name: "fpga/base",
+      purpose: "Common OS base with shared system libraries, used by every other image.",
+      layers: ["OS base", "System libraries", "Build essentials"],
+    },
+    {
+      name: "fpga/cpp-toolchain",
+      purpose: "Modern C++ toolchain for the application core.",
+      layers: ["fpga/base", "GCC / Clang", "CMake + Ninja", "Ccache", "TBB"],
+    },
+    {
+      name: "fpga/qt-build",
+      purpose: "Qt build environment for the desktop tooling and GUI.",
+      layers: ["fpga/cpp-toolchain", "Qt SDK", "Qt build dependencies"],
+    },
+    {
+      name: "fpga/mingw-cross",
+      purpose: "Cross-compiles Windows binaries from Linux runners.",
+      layers: ["fpga/cpp-toolchain", "MinGW64", "MSYS2 packages", "UCRT runtime"],
+    },
+    {
+      name: "fpga/implementation",
+      purpose: "FPGA implementation flow: synthesis, place & route and bitstream generation.",
+      layers: ["fpga/base", "FPGA vendor toolchain", "Device support files", "Flow scripts"],
+    },
+  ],
+  k8sTools: [
+    {
+      name: "SonarQube",
+      role: "Static analysis and quality gate for every merge request.",
+    },
+  ],
+}

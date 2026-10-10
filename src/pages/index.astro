@@ -2,12 +2,14 @@
 import Layout from "@/layouts/Layout.astro"
 import Experience from "@/components/Experience"
 import ThemeToggle from "@/components/ThemeToggle"
+import DevOpsShowcase from "@/components/showcase/DevOpsShowcase"
 import { About, Education, Footer, Hero, SectionHeading, Skills } from "@/components/Sections"
 import { Separator } from "@/components/ui/separator"
 import { experience, profile } from "@/data/profile"
 
 const nav = [
   { href: "#about", label: "About" },
+  { href: "#portfolio", label: "Portfolio" },
   { href: "#experience", label: "Experience" },
   { href: "#skills", label: "Skills" },
   { href: "#education", label: "Education" },
@@ -43,19 +45,25 @@ const nav = [
 
     <Separator className="my-12" />
     <section>
-      <SectionHeading id="experience" eyebrow="02" title="Experience" />
+      <SectionHeading id="portfolio" eyebrow="02" title="Portfolio" />
+      <DevOpsShowcase client:visible />
+    </section>
+
+    <Separator className="my-12" />
+    <section>
+      <SectionHeading id="experience" eyebrow="03" title="Experience" />
       <Experience client:visible items={experience} />
     </section>
 
     <Separator className="my-12" />
     <section>
-      <SectionHeading id="skills" eyebrow="03" title="Skills" />
+      <SectionHeading id="skills" eyebrow="04" title="Skills" />
       <Skills />
     </section>
 
     <Separator className="my-12" />
     <section>
-      <SectionHeading id="education" eyebrow="04" title="Education & Certifications" />
+      <SectionHeading id="education" eyebrow="05" title="Education & Certifications" />
       <Education />
     </section>
 
