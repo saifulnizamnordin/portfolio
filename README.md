@@ -15,6 +15,26 @@ npm run preview
 
 All content (about, experience, skills, education, certifications) lives in [`src/data/profile.ts`](src/data/profile.ts). Edit that file to update the site.
 
+## Writing a blog post
+
+Posts live in [`src/content/blog/`](src/content/blog/). Each `.md` file becomes a page at `/blog/<file-name>/` and shows up on the blog index and on the home page (latest 3).
+
+```md
+---
+title: "My post title"
+description: "One-sentence summary shown in the post list."
+pubDate: 2026-10-10
+tags: ["devops", "ci-cd"]
+draft: false # true = only visible in `npm run dev`
+---
+
+Post content in Markdown…
+```
+
+Frontmatter is validated at build time (see [`src/content.config.ts`](src/content.config.ts)), so a missing title or bad date fails the build instead of publishing a broken post.
+
+## shadcn/ui
+
 Add more shadcn components with:
 
 ```sh

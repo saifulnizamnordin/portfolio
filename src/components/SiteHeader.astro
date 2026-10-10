@@ -3,12 +3,12 @@ import ThemeToggle from "@/components/ThemeToggle"
 import { profile } from "@/data/profile"
 
 const nav = [
-  { href: "/blog/", label: "Blog" },
   { href: "/#about", label: "About" },
   { href: "/#portfolio", label: "Portfolio" },
   { href: "/#experience", label: "Experience" },
   { href: "/#skills", label: "Skills" },
   { href: "/#education", label: "Education" },
+  { href: "/blog/", label: "Blog" },
 ]
 const onBlog = Astro.url.pathname.startsWith("/blog")
 ---
