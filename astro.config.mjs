@@ -10,6 +10,13 @@ export default defineConfig({
   site: 'https://llyf.in',
   integrations: [react()],
 
+  markdown: {
+    shikiConfig: {
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
+    },
+  },
+
   vite: {
     plugins: [tailwindcss()]
   }

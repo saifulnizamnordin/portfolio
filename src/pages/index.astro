@@ -1,38 +1,22 @@
 ---
 import Layout from "@/layouts/Layout.astro"
 import Experience from "@/components/Experience"
-import ThemeToggle from "@/components/ThemeToggle"
+import SiteHeader from "@/components/SiteHeader.astro"
+import PostList from "@/components/PostList.astro"
+import { getPosts } from "@/lib/blog"
 import DevOpsShowcase from "@/components/showcase/DevOpsShowcase"
 import { About, Education, Footer, Hero, SectionHeading, Skills } from "@/components/Sections"
 import { Separator } from "@/components/ui/separator"
 import { experience, profile } from "@/data/profile"
 
-const nav = [
-  { href: "#about", label: "About" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#education", label: "Education" },
-]
+const posts = (await getPosts()).slice(0, 3)
 ---
 
 <Layout
   title={`${profile.name} — ${profile.headline}`}
   description="Senior Design Engineer and Cloud & DevOps engineer based in Malaysia. CI/CD, Kubernetes, multi-cloud infrastructure, FPGA tooling and C++/Qt."
 >
-  <header class="sticky top-0 z-10 border-b bg-background/80 backdrop-blur">
-    <div class="mx-auto flex h-14 max-w-3xl items-center justify-between px-4">
-      <a href="#" class="font-semibold tracking-tight">{profile.shortName}</a>
-      <nav class="flex items-center gap-1 text-sm">
-        {nav.map((item) => (
-          <a href={item.href} class="hidden rounded-md px-2.5 py-1.5 text-muted-foreground hover:bg-muted hover:text-foreground sm:inline-block">
-            {item.label}
-          </a>
-        ))}
-        <ThemeToggle client:load />
-      </nav>
-    </div>
-  </header>
+  <SiteHeader />
 
   <main class="mx-auto max-w-3xl px-4">
     <Hero />
@@ -65,6 +49,15 @@ const nav = [
     <section>
       <SectionHeading id="education" eyebrow="05" title="Education & Certifications" />
       <Education />
+    </section>
+
+    <Separator className="my-12" />
+    <section>
+      <div class="flex items-end justify-between gap-4">
+        <SectionHeading id="blog" eyebrow="06" title="Blog" />
+        <a href="/blog/" class="mb-6 shrink-0 text-sm text-muted-foreground hover:text-foreground">View all posts →</a>
+      </div>
+      <PostList posts={posts} />
     </section>
 
     <Footer />
