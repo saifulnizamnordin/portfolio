@@ -1,4 +1,4 @@
-import { ArrowUpRight, Award, BadgeCheck, GraduationCap, MapPin } from "lucide-react"
+import { ArrowUpRight, Award, BadgeCheck, GraduationCap, Mail, MapPin } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -37,6 +37,12 @@ export function Hero() {
           <a href={profile.links.github} target="_blank" rel="noreferrer">
             <GithubIcon className="size-4" />
             GitHub
+          </a>
+        </Button>
+        <Button asChild size="lg" variant="outline">
+          <a href={`mailto:${profile.email}`} title={profile.email}>
+            <Mail className="size-4" />
+            Email
           </a>
         </Button>
       </div>
@@ -152,7 +158,10 @@ export function Footer() {
     <footer className="mt-24 border-t py-8 text-sm text-muted-foreground">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p>© {new Date().getFullYear()} {profile.name}</p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <a className="inline-flex items-center gap-1 hover:text-foreground" href={`mailto:${profile.email}`}>
+            <Mail className="size-3.5" /> {profile.email}
+          </a>
           <a className="inline-flex items-center gap-1 hover:text-foreground" href={profile.links.linkedin} target="_blank" rel="noreferrer">
             LinkedIn <ArrowUpRight className="size-3.5" />
           </a>

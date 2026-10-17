@@ -8,6 +8,7 @@ export const profile = {
   currentRole: "Senior Design Engineer at Silicon X Sdn Bhd",
   location: "Malaysia",
   avatar: "https://avatars.githubusercontent.com/u/7272163?v=4",
+  email: "saifulnizamnordin@llyf.in",
   links: {
     linkedin: "https://www.linkedin.com/in/saifulnizamnordin",
     github: "https://github.com/saifulnizamnordin",
