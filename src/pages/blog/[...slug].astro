@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react"
 import Layout from "@/layouts/Layout.astro"
 import SiteHeader from "@/components/SiteHeader.astro"
 import { Footer } from "@/components/Sections"
+import Comments from "@/components/comments/Comments"
 import { formatDate, getPosts, readingTime, type Post } from "@/lib/blog"
 import { profile } from "@/data/profile"
 
@@ -44,6 +45,7 @@ const { title, description, pubDate, updatedDate, tags } = post.data
         <Content />
       </div>
     </article>
+    <Comments client:visible slug={post.id} />
     <Footer />
   </main>
 </Layout>
